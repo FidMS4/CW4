@@ -9,6 +9,10 @@ public abstract class Shape {
 		this.y = y;
 	}
 
+	public void setX(int x) {
+		this.x = x;
+	}
+
 	public void setY(int y) {
 		this.y = y;
 	}
@@ -19,6 +23,10 @@ public abstract class Shape {
 
 	public int getY() {
 		return y;
+	}
+
+	public int getLocation() {
+		return x & y;
 	}
 	
 }

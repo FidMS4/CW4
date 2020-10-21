@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import Controller.PongEventListener;
+import Model.Ball;
 import Model.Rectangle;
 
 public class GameScreen {
@@ -13,6 +14,7 @@ public class GameScreen {
 	private PongCanvas canvas;
 	public Rectangle rect1 = new Rectangle(15, 225, 20, 60);
 	Rectangle rect2 = new Rectangle(465, 225, 20, 60);
+	public Ball ball = new Ball(0, 0, 25, 25);
 	private JButton playButton = new JButton("Play");
 	private JButton resetButton = new JButton("Reset");
 	private JRadioButton redButton = new JRadioButton("Red");

@@ -49,7 +49,7 @@ public class PongEventListener implements ActionListener, KeyListener {
 			panel.setGameState(GameState.RESET);
 			panel.getCanvas().requestFocusInWindow();
 		} else if (source == panel.getPlayButton()) {
-			panel.getPlayButton().setEnabled(false);
+			//panel.getPlayButton().setEnabled(false);
 			panel.setGameState(GameState.PLAYING);
 			panel.getCanvas().requestFocusInWindow();
 		}
