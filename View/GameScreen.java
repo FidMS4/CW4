@@ -13,13 +13,20 @@ public class GameScreen {
 	private PongCanvas canvas;
 	public Rectangle rect1 = new Rectangle(15, 225, 20, 60);
 	Rectangle rect2 = new Rectangle(465, 225, 20, 60);
-	private JButton playButton = new JButton("Play!");
+	private JButton playButton = new JButton("Play");
+	private JButton resetButton = new JButton("Reset");
 	private JRadioButton redButton = new JRadioButton("Red");
 	private JRadioButton blackButton = new JRadioButton("Black");
 	private JRadioButton orangeButton = new JRadioButton("Orange");
 	private JRadioButton whiteButton = new JRadioButton("White");
 	private JRadioButton blackButton2 = new JRadioButton("Black");
 	private JButton exitButton = new JButton("Exit");
+
+	public enum GameState { 
+		PLAYING, RESET, ROUNDOVER
+	}
+
+	private GameState gState;
 
 	public GameScreen(JFrame window) {
 		this.window = window;
@@ -64,25 +71,29 @@ public class GameScreen {
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(playButton);
+		buttonPanel.add(resetButton);
 		buttonPanel.add(exitButton);
 		southPanel.add(buttonPanel);
 
 		PongEventListener listener = new PongEventListener(this);
 		exitButton.addActionListener(listener);
+		resetButton.addActionListener(listener);
+		playButton.addActionListener(listener);
 		redButton.addActionListener(listener);
 		blackButton.addActionListener(listener);
 		orangeButton.addActionListener(listener);
 		whiteButton.addActionListener(listener);
 		blackButton2.addActionListener(listener);
-		playButton.addActionListener(listener);
 		canvas.addKeyListener(listener);
 
-		canvas.requestFocusInWindow();
-		canvas.setFocusable(true);
 	}
 
 	public JButton getExitButton() {
 		return exitButton;
+	}
+
+	public JButton getResetButton() {
+		return resetButton;
 	}
 
 	public JButton getPlayButton() {
@@ -115,6 +126,14 @@ public class GameScreen {
 
 	public PongCanvas getCanvas() {
 		return canvas;
+	}
+
+	public GameState getGameState() {
+		return gState;
+	}
+
+	public void setGameState(GameState gState) {
+		this.gState = gState;
 	}
 
 }

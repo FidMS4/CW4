@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import View.GameScreen.GameState;
+
 public class PongCanvas extends JPanel implements ActionListener {
 
 	private GameScreen panel;
@@ -15,21 +17,28 @@ public class PongCanvas extends JPanel implements ActionListener {
 	Timer t = new Timer(5, this);
 	int x = 0, y = 0, velX = 4, velY = 3;
 
-
 	public PongCanvas(GameScreen panel) {
 		this.panel = panel;
 		setPreferredSize(new Dimension(500, 500));
-		setBackground(Color.white);
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		Graphics2D g2d = (Graphics2D) g;
 
 		g2d.setBackground(backgroundColor);
 		g2d.clearRect(0, 0, 500, 500);
+
+		GameScreen.GameState state = panel.getGameState();
+
+		if (state == GameScreen.GameState.PLAYING) { 
+			t.start();
+		} else if (state == GameScreen.GameState.ROUNDOVER) {
+			t.stop();
+		} else if (state == GameScreen.GameState.RESET) {
+		
+		}
 		
 		g2d.setColor(ballColor);
 		g2d.fillOval(x, y, 25, 25);
@@ -46,17 +55,18 @@ public class PongCanvas extends JPanel implements ActionListener {
 		g2d.setFont(new Font("Courier", Font.BOLD, 20));
 		g2d.drawString("Score: " + leftHits, 45, 75);
 
-		g2d.setColor(Color.RED);
+		g2d.setColor(Color.BLUE);
 		g2d.setFont(new Font("Courier", Font.BOLD, 20));
 		g2d.drawString("Score: " + rightHits, 375, 75);
 
 		if (x < 0) {
+			panel.setGameState(GameState.ROUNDOVER);
 			++leftHits;
 		} else if (x > 475) {
+			panel.setGameState(GameState.ROUNDOVER);
 			++rightHits;
 		}
 		
-		t.start();
 	}
 	
 	@Override
@@ -65,7 +75,7 @@ public class PongCanvas extends JPanel implements ActionListener {
 			velX = -velX;
 		} else if (y < 0 || y > 480) {
 			velY = -velY;
-		}
+		} 
 		
 		x += velX;
 		y += velY;
