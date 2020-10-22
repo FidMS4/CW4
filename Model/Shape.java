@@ -28,5 +28,5 @@ public abstract class Shape {
 	public int getLocation() {
 		return x & y;
 	}
-	
+
 }

@@ -26,5 +26,5 @@ public class Ball extends Shape {
 	public int getHeight() {
 		return height;
 	}
-	
+
 }

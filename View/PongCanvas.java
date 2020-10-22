@@ -2,7 +2,6 @@ package View;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
 import javax.swing.*;
 
 import View.GameScreen.GameState;
@@ -17,7 +16,7 @@ public class PongCanvas extends JPanel implements ActionListener {
 
 	Timer t = new Timer(5, this);
 	
-	int x = 250, y = 250, velX = 3, velY = 2;
+	int x = 250, y = 250, velX = 5, velY = 4;
 	
 	public PongCanvas(GameScreen panel) {
 		this.panel = panel;
@@ -81,13 +80,24 @@ public class PongCanvas extends JPanel implements ActionListener {
 			velX = -velX;
 		} else if (y < 0 || y > 480) {
 			velY = -velY;
-		} 
-		
+		}
+
+		if (x < panel.rect1.getX()+10) {
+			if (y >= panel.rect1.getY() && y <= panel.rect1.getY()+60) {
+				velX = -velX;
+			}
+		} else if (x > panel.rect2.getX()-10) {
+			if (y <= panel.rect2.getY() && y >= panel.rect2.getY()-60) {
+				velX = -velX;
+			}
+		}
+
 		x += velX;
 		y += velY;
 
-		panel.rect2.setY(y + 5);
+		panel.rect2.setY(y + 7);
 		repaint();
 	}
+
 
 }
