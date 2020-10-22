@@ -18,7 +18,7 @@ public class MenuScreen {
 		panel.setPreferredSize(new Dimension(400, 225));
 		panel.setBackground(Color.black);
 	
-		JButton pongButton = new JButton("Pong");
+		JButton pongButton = new JButton("Pong V2");
 		pongButton.setPreferredSize(new Dimension(400, 190));
 		JTextArea info = new JTextArea("by Fidel");
 		panel.add(pongButton);
